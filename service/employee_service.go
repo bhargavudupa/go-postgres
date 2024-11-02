@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"go-postgres-test-1/model"
 	"go-postgres-test-1/repository"
 )
@@ -77,8 +76,6 @@ func (service *employeeService) UpdateEmployee(employeeId uint, updateEmployee m
 		return err
 	}
 
-	fmt.Println("Log Update Employee Service employee-before", employee)
-
 	if updateEmployee.Name != nil {
 		employee.Name = *updateEmployee.Name
 	}
@@ -96,21 +93,7 @@ func (service *employeeService) UpdateEmployee(employeeId uint, updateEmployee m
 		employee.EmployerId = &employer.Id
 	}
 
-	fmt.Println("Log Update Employee Service employee-after", employee)
-
-	// if *updateEmployee.UnsetEmployer {
 	return service.employeeRepo.UpdateEmployee(employeeId, employee.Name, employee.Age, employee.Salary, employee.EmployerId, updateEmployee.UnsetEmployer)
-	// } else {
-	// if updateEmployee.EmployerId != nil {
-	// 	employer, err := service.employerRepo.GetEmployer(updateEmployee.EmployerId)
-	// 	if err.StatusCode != 0 {
-	// 		return err
-	// 	}
-	// return service.employeeRepo.UpdateEmployee(employeeId, employee.Name, employee.Age, employee.Salary, employee.EmployerId, false)
-	// } else {
-	// 	return service.employeeRepo.UpdateEmployee(employeeId, updateEmployee.Name, updateEmployee.Age, updateEmployee.Salary, nil, false)
-	// }
-	// }
 }
 
 func (service *employeeService) DeleteEmployee(employeeId uint) (err model.Error) {

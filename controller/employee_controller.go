@@ -150,7 +150,6 @@ func (controller *employeeController) UpdateEmployee(ctx *gin.Context) {
 		})
 		return
 	}
-	fmt.Println("Log Update Employee Controller", employee)
 
 	if employee.Name == nil && employee.Age == nil && employee.Salary == nil && employee.EmployerId == nil && employee.UnsetEmployer == nil {
 		ctx.JSON(http.StatusOK, gin.H{
